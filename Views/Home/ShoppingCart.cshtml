@@ -1,0 +1,35 @@
+﻿@{
+    MusicLibrary[] Songs = (MusicLibrary[])ViewData["Songs"];
+    int[] Ammount = (int[])ViewData["Ammount"];
+    decimal Total = (decimal)ViewData["Total"];
+}
+<h1>@ViewData["Title"]</h1>
+@model ShoppingCart
+
+<div class="text-center">
+    <h1 class="display-4">View your Cart!</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="col-sm-3">Song</th>
+                <th class="col-sm-3">Price Per Song</th>
+                <th class="col-sm-3">Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Songs.Length; i++)
+            {
+                <tr>
+                    <td>@Songs[i].SongName</td>
+                    <td>@Songs[i].Price</td>
+                    <td>@Ammount[i]</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <hr />
+
+    <strong>Final Price: @Total</strong>
+</div>

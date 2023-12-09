@@ -1,0 +1,89 @@
+﻿@{
+    List<string>? genres = (List<string>?)ViewData["Genres"];
+    List<string>? artists = (List<string>?)ViewData["Artists"];
+    List<MusicLibrary>? songs = (List<MusicLibrary>?)ViewData["Songs"];
+    ShoppingCart cart = (ShoppingCart)ViewData["Cart"];
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the Music Shop</h1>
+
+    <form asp-controller="Home" asp-action="Shop" method="get">
+        <label for="genre">Select a Genre:</label>
+        <select id="genre" name="genre">
+            <option value="">All Genres</option>
+            @foreach(string genre in genres)
+            {
+                <option value="@genre">@genre</option>
+            }
+        </select>
+        <input type="submit" value="Filter" />
+    
+        @if(artists.Count != 0)
+        {
+            <label for="artist">Select an Artist:</label>
+            <select id="artist" name="artist">
+                <option value="">All Artists</option>
+                @foreach (string artist in artists)
+                {
+                    <option value="@artist">@artist</option>
+                }
+            </select>
+            <input type="submit" value="Filter" />
+        }
+
+        <br />
+
+        <input type="submit" value="Clear Filters" />
+        
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="col-sm-2">Song Name</th>
+                <th class="col-sm-2">Artist</th>
+                <th class="col-sm-2">Genre</th>
+                <th class="col-sm-2">Price</th>
+                <th class="col-sm-1">Quantity</th>
+                <th class="col-sm-1">Purchase</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (MusicLibrary song in songs)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => song.SongName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => song.ArtistName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => song.Genre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => song.Price)
+                    </td>
+                    
+                    <form asp-controller="Home" asp-action="AddToCart" method="post">
+                        @Html.Hidden("songId", song.Id)
+                        <td>
+                            <select name="Ammount">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" type="submit" style="white-space:nowrap" name="">Add to Cart</button>
+                        </td>
+                    </form>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
