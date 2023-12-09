@@ -19,6 +19,11 @@ namespace MusicShop.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Home()
+        {
+            return View();
+        }
+
         // GET: MusicLibrary
         public async Task<IActionResult> Index()
         {

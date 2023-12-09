@@ -1,12 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MusicShop.Data;
+using MusicShop.Migrations;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MusicShopContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MusicShopContext") ?? throw new InvalidOperationException("Connection string 'MusicShopContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
 
 var app = builder.Build();
 
@@ -27,6 +30,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Home}/{id?}");
 
 app.Run();

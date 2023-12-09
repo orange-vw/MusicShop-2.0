@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Administrator Login";
+}
+<h1>@ViewData["Title"]</h1>
+@model LoginModel
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <h2>Login</h2>
+    <form asp-action="Login" method="post">
+        <div>
+            <label asp-for="Username"></label>
+            <input asp-for="Username" />
+            <span asp-validation-for="Username"></span>
+        </div>
+        <div>
+            <label asp-for="Password"></label>
+            <input asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <button type="submit">Login</button>
+        <span asp-validation-summary="All"></span>
+    </form>
+</body>
+</html>
+
