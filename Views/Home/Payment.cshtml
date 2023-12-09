@@ -1,0 +1,45 @@
+﻿@{
+    string cardNumber = ViewData["CardNumber"] as string;
+    string address = ViewData["Address"] as string;
+    string phoneNumber = ViewData["PhoneNumber"] as string;
+    string email = ViewData["Email"] as string;
+}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Form</title>
+</head>
+<body>
+    <h2>User Information Form</h2>
+
+    <form>
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" name="cardNumber" pattern="[0-9]{16}" title="Please enter a 16-digit card number" required>
+        <br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+        <br>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" title="Please enter a 10-digit phone number" required>
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+
+        <label for="currentTime">Current Time:</label>
+        <span id="currentTime"></span>
+        <br>
+
+        <a asp-controller="Home" asp-action="Receipt" class="btn btn-primary">View Receipt and Clear Cart</a>
+    </form>
+
+    <script>
+        document.getElementById('currentTime').innerText = new Date().toLocaleString();
+    </script>
+</body>
+</html>

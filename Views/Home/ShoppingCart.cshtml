@@ -1,0 +1,42 @@
+﻿@{
+    MusicLibrary[] Songs = (MusicLibrary[])ViewData["Songs"];
+    int[] Ammount = (int[])ViewData["Ammount"];
+    decimal Total = (decimal)ViewData["Total"];
+}
+
+<div class="text-center">
+    <h1 class="display-4">View your Cart!</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="col-sm-3">Song</th>
+                <th class="col-sm-3">Price Per Song</th>
+                <th class="col-sm-3">Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Songs.Length; i++)
+            {
+                <tr>
+                    <td>@Songs[i].SongName</td>
+                    <td>@Songs[i].Price</td>
+                    <td>
+                        <form asp-controller="Home" asp-action="RemoveFromCart" method="post">
+                            <input type="hidden" name="songId" value="@Songs[i].Id" />
+                            <button type="submit">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <hr />
+
+    <strong>Final Price: @Total</strong>
+
+    <form asp-controller="Home" asp-action="Payment" method="get">
+        <input type="submit" value="Proceed to Payment">
+    </form>
+</div>
